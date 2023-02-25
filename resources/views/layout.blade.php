@@ -232,11 +232,22 @@
 
   <header class="section-header pb-3" style="position:fixed; z-index: 1000;width: 100%;">
 
-
+  
     <!-- style="position:fixed; z-index: 1000;width: 100%;" -->
     <section class="header-main pb-3" style="background-color: {{$interfaceColor->hd_cl_background}}">
         <div class="container">
-            <div class="container-fluid">
+            <div class="container-fluid" style="position: relative;">
+              <div class="mt-1" style="position:absolute; right:0px">
+                <a href="">
+                  <img  style="width:40px" src="/images/language/VN.jpg" alt="">
+                </a>
+                <a href="">
+                  <img style="width:40px" src="/images/language/EN.jpg" alt="">
+                </a>
+                <a href="">
+                  <img  style="width:40px"src="/images/language/CN.jpg" alt="">
+                </a>
+              </div>
                 <a href="/" id="logo-doc" style="display: flex;justify-content: center;align-items: center;">
                     <img width="400" src="/images/logo/logonn.png" alt="">
 </a>
@@ -276,6 +287,7 @@
 
             <div class="mt-2">
                 <div style="display:flex;justify-content: space-evenly">
+                  <a class="link-dm" href="/">Trang chủ</a>
                 <a class="link-dm" href="/danhmuc/all">Tất cả sản phẩm</a>
                 @foreach($categories as $category)
                 <a class="link-dm" href="/danhmuc/{{$category->link}}">{{$category->title}}</a>

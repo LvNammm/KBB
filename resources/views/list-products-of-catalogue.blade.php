@@ -4,8 +4,66 @@
 
 <!-- style="position: relative;top:200px" -->
 
+<div class="container p-0">
+    <div class=" ps-0 pe-0  mb-3 row w-100" style="justify-content:space-between">
+        <div class="col-md-8 pe-1 boder-green">
 
-<section class="section-products" style="padding: 0px;">
+            <div id="carouselExampleControls" class="carousel carousel-dark slide" data-ride="carousel"
+                data-bs-interval="false">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img class="d-block w-100" src="/images/carosel/bia2.png" alt="First slide">
+                    </div>
+                    <div class="carousel-item">
+                        <img class="d-block w-100" src="/images/carosel/bia1.png" alt="Second slide">
+                    </div>
+                </div>
+                <!-- <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+
+
+                    </a>
+                    <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+
+
+                    </a> -->
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls"
+                    data-bs-slide="prev">
+
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls"
+                    data-bs-slide="next">
+
+                </button>
+            </div>
+
+        </div>
+
+        <div class="col-md-4 ps-1 row p-0">
+            <div class="col-md-12 ps-0 pe-0">
+                <img class="boder-green w-100 p-0 pb-2" src="/images/carosel/biabe1.png" alt="">
+            </div>
+
+            <div class="col-md-12 ps-0 pe-0">
+                <img class="col-md-12 boder-green w-100 p-0 pt-2" src="/images/carosel/biabe1.png" alt="">
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="container ps-0 pe-0 mb-3">
+    <div class="row">
+        <div class="col-md-6">
+        <img style="width: 100%" src="/images/carosel/biangang1.jpg" alt="">
+    </div>
+    <div class="col-md-6">
+        <img style="width:100%" src="/images/carosel/biangang2.png" alt="">
+    </div>
+    </div>
+</div>
+<br>
+
+<section class="section-products mt-3" style="padding: 0px;">
     <!-- Trang trí nhà cửa -->
     <div class="container mb-5">
         <div class="row mb-3 category" style="justify-content: center;align-items: center;">

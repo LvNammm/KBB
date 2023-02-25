@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\Interface_ColorCtrl;
 use App\Http\Controllers\Admin\CategoryAdminCtrl;
 use App\Http\Controllers\Admin\ProductAdminCtrl;
 use App\Http\Controllers\Admin\CatalogueAdminController;
+use App\Http\Controllers\Admin\PercentAdminController;
 use  App\Http\Controllers\Catalogue;
 
 /*
@@ -68,6 +69,8 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get("/create-catalogue",[CatalogueAdminController::class,"create"]);
     Route::get("/searchProduct/{keySearch}",[CatalogueAdminController::class,"searchProduct"]);
     Route::post("/add-catalogue",[CatalogueAdminController::class,"add"]);
+    Route::get("/catalogue/percent",[PercentAdminController::class,"create"]);
+    Route::post("/update-percent",[PercentAdminController::class,"update"]);
 });
 
 

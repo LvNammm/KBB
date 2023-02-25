@@ -5,14 +5,17 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Type;
+use App\Models\PercentPrice;
 
 class CatalogueAdminController extends Authentication
 {
     public function create(Request $request)
     {
+        $percentPrice = PercentPrice::find(1);
+        
         if (!$this->authentication($request))
             return redirect("/admin/login");
-        return view("admin.create_catalogue");
+        return view("admin.create_catalogue",["percentPrice"=>$percentPrice]);
     }
 
     public function searchProduct($keySearch){
@@ -59,6 +62,7 @@ class CatalogueAdminController extends Authentication
                     // $_200to500 = $request->_200to500;
                     $_200to1000 = $request->_200to1000;
                     $_more1000 = $request->_more1000;
+                    $__priceCN = $request->_priceCN;
                     $types = array();
                     for($i=0;$i<count($_id);$i++){
                         $type = Type::find($_id[$i]);
@@ -72,6 +76,7 @@ class CatalogueAdminController extends Authentication
                         $type->_more1000 = $_more1000[$i];
                         $type->name_type = $_type[$i];
                         $type->price = $_price[$i];
+                        $type->china_price = $__priceCN[$i];
                         array_push($types,$type);
                     }
                     $product->show_in_catgolue = 1;

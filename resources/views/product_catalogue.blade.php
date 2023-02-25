@@ -146,11 +146,20 @@
                         <thead>
                             <tr>
                                 <th scope="col"></th>
-                                <th scope="col">Dưới 200</th>
-                                <th scope="col">200 đến 1000</th>
-                                <th scope="col">Trên 1000</th>
+                                <th scope="col" colspan="2">Dưới 200</th>
+                                <th scope="col" colspan="2">200 đến 1000</th>
+                                <th scope="col" colspan="2">Trên 1000</th>
                                 {{-- <th scope="col">500 đến 1000</th>
                                 <th scope="col">Trên 1000</th> --}}
+                            </tr>
+                            <tr>
+                                <th scope="col"></th>
+                                <th scope="col">VNĐ</th>
+                                <th scope="col">USD</th>
+                                <th scope="col">VNĐ</th>
+                                <th scope="col">USD</th>
+                                <th scope="col">VNĐ</th>
+                                <th scope="col">USD</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -159,8 +168,11 @@
                                 <tr>
                                     <td>{{ $type->name_type }}</td>
                                     <td>{{ $type->_less200 }}</td>
+                                    <td></td>
                                     <td>{{ $type->_200to1000 }}</td>
+                                    <td></td>
                                     <td>{{ $type->_more1000 }}</td>
+                                    <td></td>
                                     {{-- <td>{{ $type->_500to1000 }}</td>
                                     <td>{{ $type->_more1000 }}</td> --}}
                                 </tr>

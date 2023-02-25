@@ -15,7 +15,6 @@ class ProductCtrl extends Controller
         $categories = Category::orderBy('priority')->get();
         $product = Product::where('link',$link)->first();
         $product = $this->classify($product);
-        echo['title'];
         return view("product",["interfaceColor"=>$interfaceColor,"categories"=>$categories,"product"=>$product]);
     }
 

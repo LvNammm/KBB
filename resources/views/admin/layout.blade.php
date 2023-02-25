@@ -198,12 +198,15 @@
                               </a>
                           </li>
                           <li class="menu-item">
+                            <a href="/admin/catalogue/percent" class="menu-link">
+                                <div data-i18n="Notifications">Tỉ lệ</div>
+                            </a>
+                        </li>
+                          <li class="menu-item">
                               <a href="/admin/catalogue/all" class="menu-link">
                                   <div data-i18n="Notifications">All</div>
                               </a>
-                          </li>
-
-                          
+                          </li> 
                       </ul>
                   </li>
                 </ul>

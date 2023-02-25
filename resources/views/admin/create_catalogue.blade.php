@@ -30,6 +30,13 @@
         #myUL li a:hover:not(.header) {
             background-color: #eee;
         }
+        .input-price{
+            width: 100px;
+        }
+        table, th, td {
+            border: 1px solid black;
+             border-collapse: collapse;
+        }
     </style>
     <div class="row d-flex justify-content-center">
 
@@ -109,29 +116,46 @@
             </div>
 
 
-            <table class="table table-striped">
+            <table class="table table-striped" style="text-align: center">
                 <thead>
                     <tr>
-                        <th scope="col">#</th>
                         <th scope="col">Phân loại</th>
                         <th scope="col">Giá </th>
-                        <th scope="col">Dưới 200</th>
-                        <th scope="col">200-1000</th>
-                        <th scope="col">Trên 1000</th>
-                        <th scope="col"></th>
+                        <th scope="col"> Giá CN</th>
+                        <th scope="col"   colspan="2">Dưới 200</th>
+                        <th scope="col"  colspan="2">200-1000</th>
+                        <th scope="col"  colspan="2">Trên 1000</th>
+                        <th scope="col"  colspan="2"></th>
+                    </tr>
+                    <tr>
+                        <th>
+                        
+                        </th>
+                        <th></th>
+                        <th></th>
+
+                        <th>USD</th>
+                        <th>VND</th>
+                        <th>USD</th>
+                        <th>VND</th>
+                        <th>USD</th>
+                        <th>VND</th>
                     </tr>
                 </thead>
                 <tbody id="tbody-classify">
                     <tr>
                         <td style="display: none"><input type="text" name="_id[]"></td>
-                        <th scope="row">1</th>
-                        <td><input type="text" name="_type[]" id=""></td>
-                        <td><input type="text" name="_price[]"></td>
-                        <td><input type="text" name="_less200[]" id=""></td>
-                        <td><input type="text" name="_200to1000[]" id=""></td>
+                        <td><input  class="input-price" type="text" name="_type[]" id=""></td>
+                        <td><input class="input-price" type="text" name="_price[]"></td>
+                        <td><input class="input-price priceCN" onchange="changepriceCN()" type="text" name="_priceCN[]"></td>
+                        <td><input class="input-price " type="text" name="_less200USD[]" id=""></td>
+                        <td><input class="input-price less200" type="text" name="_less200[]" id=""></td>
+                        <td><input class="input-price" type="text" name="_200to1000USD[]" id=""></td>
+                        <td><input class="input-price _200to1000" type="text" name="_200to1000[]" id=""></td>
                         {{-- <td><input type="text" name="_200to500[]" id=""></td>
                         <td><input type="text" name="_500to1000[]" id=""></td> --}}
-                        <td><input type="text" name="_more1000[]" id=""></td>
+                        <td><input class="input-price" type="text" name="_more1000[]USD" id=""></td>
+                        <td><input class="input-price more1000" type="text" name="_more1000[]" id=""></td>
                         <td><a href="#" class="remove-classify" onclick="removeTr()">x</a></td>
                     </tr>
                 </tbody>
@@ -148,7 +172,12 @@
 
     <script>
         let listProduct = undefined;
-
+        let percent2 = 100+ {{$percentPrice->below200}};
+        let percent2to1 = 100+ {{$percentPrice->_200to1000}};
+        let percent1 = 100+ {{$percentPrice->more1000}};
+        console.log(percent2)
+        console.log(percent2to1)
+        console.log(percent1)
         function loadingPage(){
             alert("Load lại thì ấn vào cái quay tròn trên góc màn hình ấy. chứ ấn đây làm cái éo gì");
 
@@ -160,12 +189,15 @@
         function addclassify(){
            let textHtml = $("#tbody-classify").html()
            let textAddHtml = `<tr> <td style="display: none"><input type="text" name="_id[]"></td>
-                        <th scope="row">1</th>
-                        <td><input type="text" name="_type[]" id=""></td>
-                        <td><input type="text" name="_price[]"></td>
-                        <td><input type="text" name="_less200[]" id=""></td>
-                        <td><input type="text" name="_200to1000[]" id=""></td>
-                        <td><input type="text" name="_more1000[]" id=""></td>
+                        <td><input class="input-price" type="text" name="_type[]" id=""></td>
+                        <td><input class="input-price" type="text" name="_price[]"></td>
+                        <td><input class="input-price priceCN" onchange="changepriceCN()" type="text" name="_priceCN[]"></td>
+                        <td><input class="input-price" type="text" name="_less200USD[]" id=""></td>
+                        <td><input class="input-price less200" type="text" name="_less200[]" id=""></td>
+                        <td><input class="input-price" type="text" name="_200to1000USD[]" id=""></td>
+                        <td><input class="input-price _200to1000" type="text" name="_200to1000[]" id=""></td>
+                        <td><input class="input-price" type="text" name="_more1000USD[]" id=""></td>
+                        <td><input class="input-price more1000" type="text" name="_more1000[]" id=""></td>
                         <td><a href="#" class="remove-classify" onclick="removeTr()">x</a></td> </tr>`
             textHtml.replace("value", "");
             console.log(textHtml)
@@ -220,16 +252,29 @@
             $("#img_product").attr("src",listProduct[i].url_img);
             let textHtml = ``;
             for(let j=0;j<listProduct[i].types.length;j++){
-                textHtml += `<tr><td style="display: none"><input type="text" name="_id[]" value = "${listProduct[i].types[j].id}"></td>
-                        <th scope="row">${j+1}</th>
-                        <td><input type="text" name="_type[]" id="" value = "${listProduct[i].types[j].name_type}"></td>
-                        <td><input type="text" name="_price[]" value = "${listProduct[i].types[j].price}"></td>
-                        <td><input type="text" name="_less200[]" id="" value = "${listProduct[i].types[j]._less200}"></td>
-                        <td><input type="text" name="_200to1000[]" id="" value = "${listProduct[i].types[j]._200to1000}"></td>
-                        <td><input type="text" name="_more1000[]" id="" value = "${listProduct[i].types[j]._more1000}"></td>
+                textHtml += `<tr><td style="display: none"><input class="input-price" type="text" name="_id[]" value = "${listProduct[i].types[j].id}"></td>
+                        <td><input type="text" class="input-price" name="_type[]" id="" value = "${listProduct[i].types[j].name_type}"></td>
+                        <td><input type="text" class="input-price" name="_price[]" value = "${listProduct[i].types[j].price==null?'':listProduct[i].types[j].price}"></td>
+                        <td><input class="input-price priceCN" onchange="changepriceCN()" type="text" name="_priceCN[]" value = "${listProduct[i].types[j].china_price==null?'':listProduct[i].types[j]._less200}"></td>
+                        <td><input class="input-price" type="text" name="_less200USD[]" id=""></td>
+                        <td><input class="input-price less200" type="text" name="_less200[]" id="" value = "${listProduct[i].types[j]._less200==null?'':listProduct[i].types[j]._less200}"></td>
+                        <td><input class="input-price" type="text" name="_200to1000USD[]" id=""></td>
+                        <td><input class="input-price _200to1000" type="text" name="_200to1000[]" id="" value = "${listProduct[i].types[j]._200to1000==null?'':listProduct[i].types[j]._200to1000}"></td>
+                        <td><input class="input-price" type="text" name="_more1000USD[]" id=""></td>
+                        <td><input class="input-price more1000" type="text" name="_more1000[]" id="" value = "${listProduct[i].types[j]._more1000==null?'':listProduct[i].types[j]._more1000}"></td>
                         <td><a href="#" class="remove-classify">x</a></td></tr>`
             }
             $("#tbody-classify").html(textHtml)   
         }
+        function changepriceCN(){
+            let td = event.target.parentElement.parentElement
+            let priceCN = event.target.value;
+            let less200 = td.querySelector(".less200")
+            let _200to100 = td.querySelector("._200to1000")
+            let more1000 = td.querySelector(".more1000")
+            less200.value = Math.round((priceCN*percent2)/10000)*100
+            _200to100.value = Math.round((priceCN*percent2to1)/10000)*100
+            more1000.value = Math.round((priceCN*percent1)/10000)*100
+         }
     </script>
 @endsection
